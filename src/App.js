@@ -1,138 +1,35 @@
-import {Picker} from '@react-native-picker/picker';
-import React, {Component} from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from 'react-native';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import React from 'react'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      prioridade: 0,
-    };
-  }
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-  render() {
+import Home from './pages/Home'
+import CriarNota from './pages/CriarNota'
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
     return (
-      <SafeAreaView>
-        <ScrollView>
-          <View style={styles.container}>
-            <Text style={styles.txtCriarNota}>Criar nota</Text>
-            <TouchableOpacity>
-              <Image
-                source={require('./assets/ButtonClose.png')}
-                style={styles.btnClose}
-              />
-            </TouchableOpacity>
-          </View>
+        <NavigationContainer>
+            <Stack.Navigator>
 
-          <View style={{backgroundColor: '#EFEFEF'}}>
-            <Text style={styles.txtTitulo}>Nota da nota (obrigatório)</Text>
+                <Stack.Screen 
+                name="Home" 
+                component={Home}
+                options={{
+                    headerShown: false
+                }}
+                />
+                
+                <Stack.Screen 
+                name="CriarNota" 
+                component={CriarNota} 
+                options={{
+                    headerShown: false
+                }}
+                />
 
-            <TextInput
-              style={styles.inputNoteName}
-              placeholder="Insira"></TextInput>
-
-            <Text style={styles.txtTitulo}>Descrição</Text>
-            <TextInput
-              style={styles.inputNoteDescription}
-              placeholder="Insira"
-              multiline
-              numberOfLines={5}></TextInput>
-
-            <Text style={styles.txtTitulo}>Prioridade</Text>
-            <Picker
-              style={styles.pickerPriority}
-              selectedValue={this.state.prioridade}
-              onValueChange={itemValue =>
-                this.setState({prioridade: itemValue})
-              }
-              placeholder={''}>
-              <Picker.Item key={1} value={1} label={'Insira'} enabled={false} />
-              <Picker.Item key={2} value={2} label={'Urgente'} />
-              <Picker.Item key={3} value={3} label={'Alta'} />
-              <Picker.Item key={4} value={4} label={'Média'} />
-              <Picker.Item key={5} value={5} label={'Baixa'} />
-            </Picker>
-
-            <Text style={styles.txtTitulo}>Data</Text>
-            
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    );
-  }
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: 415,
-    height: 72,
-    backgroundColor: '#0F62FE',
-    flexDirection: 'row',
-  },
-  txtCriarNota: {
-    fontFamily: 'IBM Plex Sans',
-    fontSize: 32,
-    color: '#FFFFFF',
-    marginTop: 25,
-    marginLeft: 16,
-  },
-  btnClose: {
-    width: 60,
-    height: 60,
-    marginLeft: 190,
-    marginTop: 70,
-    display: 'flex',
-  },
-  txtTitulo: {
-    fontFamily: 'IBM Plex Sans',
-    fontSize: 20,
-    color: '#161616',
-    marginTop: 20,
-    marginLeft: 16,
-    fontWeight: 'bold',
-  },
-  inputNoteName: {
-    backgroundColor: '#FFF',
-    borderBottomWidth: 1,
-    marginTop: 10,
-    marginLeft: 16,
-    marginRight: 16,
-    fontSize: 20,
-    padding: 10,
-  },
-  inputNoteDescription: {
-    backgroundColor: '#FFF',
-    borderBottomWidth: 1,
-    fontSize: 20,
-    padding: 10,
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 10,
-  },
-  pickerPriority: {
-    backgroundColor: '#FFF',
-    fontFamily: 'IBM Plex Sans',
-    fontSize: 20,
-    color: '#161616',
-    marginTop: 20,
-    marginRight: 16,
-    marginLeft: 16,
-    fontWeight: 'bold',
-  },
-  pickerDate: {
-      width: 100,
-      height: 100,
-  },
-});
-
-export default App;
