@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     View,
     SafeAreaView,
@@ -14,6 +14,7 @@ import { Picker } from '@react-native-picker/picker';
 
 import { useNavigation } from '@react-navigation/native'
 
+import DateTime from '../../components/DateTime';
 
 
 export default function CriarNota() {
@@ -61,6 +62,7 @@ export default function CriarNota() {
                     </Picker>
 
                     <Text style={styles.txtTitulo}>Data</Text>
+                   <DateTime />
 
                 </View>
             </ScrollView>
